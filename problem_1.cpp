@@ -41,6 +41,8 @@ private:
 
 class AddressBook {
 public:
+    AddressBook() {}
+
     void Run();
 
     int Menu();
@@ -67,7 +69,7 @@ void UserList::Show() {
     }
 }
 
-int UserList::Search(std::string tname) {
+int UserList::Search(const std::string tname) {
     User *user = head->next;
     while (user != nullptr) {
         if (tname == user->name)return user->address;
@@ -76,7 +78,7 @@ int UserList::Search(std::string tname) {
     return NOT_FOUND;
 }
 
-int UserList::Change(std::string tname, int taddress) {
+int UserList::Change(const std::string tname, int taddress) {
     User *user = head->next;
     while (user != nullptr) {
         if (tname == user->name) {
@@ -88,7 +90,7 @@ int UserList::Change(std::string tname, int taddress) {
     return UNSUCCES;
 }
 
-int UserList::Delete(std::string tname) {
+int UserList::Delete(const std::string tname) {
     User *user = head->next, *last = head;
     while (user != nullptr) {
         if (user->name == tname) {
