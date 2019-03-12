@@ -1,9 +1,11 @@
 #include <utility>
+
+#include <utility>
 #include <iostream>
 
 #define SUCCESS 0
 #define UNSUCCES 1
-#define NOT_FOUND -1
+#define NOT_FOUND (-1)
 
 class User {
 public:
@@ -14,7 +16,7 @@ public:
     User() : next(nullptr), address(0) {}
 
     static User *Create(std::string tname = "", int taddress = 0) {
-        User *user = new User;
+        auto user = new User;
         user->name = std::move(tname);
         user->address = taddress;
         return user;
@@ -27,11 +29,11 @@ public:
 
     void Insert(std::string, int);
 
-    int Search(std::string);
+    int Search(const std::string &);
 
-    int Change(std::string, int);
+    int Change(const std::string &, int);
 
-    int Delete(std::string);
+    int Delete(const std::string &);
 
     void Show();
 
@@ -41,7 +43,7 @@ private:
 
 class AddressBook {
 public:
-    AddressBook() {}
+    AddressBook() = default;
 
     void Run();
 
@@ -56,7 +58,7 @@ void UserList::Init() {
 }
 
 void UserList::Insert(std::string tname, int taddress) {
-    User *user = User::Create(tname, taddress);
+    User *user = User::Create(std::move(tname), taddress);
     user->next = head->next;
     head->next = user;
 }
@@ -69,7 +71,7 @@ void UserList::Show() {
     }
 }
 
-int UserList::Search(const std::string tname) {
+int UserList::Search(const std::string &tname) {
     User *user = head->next;
     while (user != nullptr) {
         if (tname == user->name)return user->address;
@@ -78,7 +80,7 @@ int UserList::Search(const std::string tname) {
     return NOT_FOUND;
 }
 
-int UserList::Change(const std::string tname, int taddress) {
+int UserList::Change(const std::string &tname, int taddress) {
     User *user = head->next;
     while (user != nullptr) {
         if (tname == user->name) {
@@ -90,7 +92,7 @@ int UserList::Change(const std::string tname, int taddress) {
     return UNSUCCES;
 }
 
-int UserList::Delete(const std::string tname) {
+int UserList::Delete(const std::string &tname) {
     User *user = head->next, *last = head;
     while (user != nullptr) {
         if (user->name == tname) {
@@ -171,7 +173,7 @@ int AddressBook::Menu() {
 }
 
 int main() {
-    AddressBook addressBook;
+    AddressBook addressBook{};
     addressBook.Run();
     return 0;
 }
