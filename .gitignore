@@ -1,3 +1,6 @@
+**/.idea
+**/cmake-build-debug
+cmake-build-debig/
 .DS_Store
 # Prerequisites
 *.d
