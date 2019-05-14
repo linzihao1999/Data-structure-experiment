@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(p1)
+project(Data-structure-experiment)
 
 set(CMAKE_CXX_STANDARD 11)
 

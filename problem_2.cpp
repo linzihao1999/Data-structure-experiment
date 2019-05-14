@@ -6,11 +6,11 @@ public:
 
     int num;
 
-    List *ToNext() {
+    List *toNext() {
         return this->next;
     }
 
-    void Link(List *list) {
+    void link(List *list) {
         this->next = list;
     }
 
@@ -27,16 +27,29 @@ private:
 
 class Sqlist {
 public:
-    Sqlist() {}
+    Sqlist() {
+        length_base = 100;
+        num = new int[length_base];
+        head = 0;
+    }
 
     int length() {
         return this->length_base;
     }
 
-    void push(int data);
+    void push(int data) {
+        checkCap();
+        num[head++] = data;
+    }
 
-    void CheckCap();
-
+    void checkCap() {
+        if (head + 1 < length_base)return;
+        int *temp = new int[length_base <<= 1];
+        for (int i = 0; i < length_base; i++)
+            temp[i] = num[i];
+        delete num;
+        num = temp;
+    }
 
     int &operator[](int i) {
         return num[i];
@@ -48,21 +61,26 @@ private:
     int head;
 };
 
-void Sqlist::CheckCap() {
-    if (head + 1 < length_base)return;
-    int *temp = new int[length_base << 1];
-    for (int i = 0; i < length_base; i++)
-        temp[i] = num[i];
-    delete num;
-    num = temp;
-}
-
-void Sqlist::push(int data) {
-
-}
-
 class Joseph {
 public:
+    Joseph(int n1, int k1) : n(n1), k(k1) {
+        list = List::create();
+    }
+
+    int useList() {
+        List *p = list;
+        for (int i = 1; i <= n; i++) {
+            p->link(List::create());
+            p = p->toNext();
+        }
+    }
+
+    int useSqlist() {
+
+    }
+
 private:
+    List *list;
+    Sqlist sqlist;
     int n, k;
 };
