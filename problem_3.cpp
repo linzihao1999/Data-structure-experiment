@@ -177,7 +177,6 @@ int priority_queue<T>::menu() {
             std::cout << _length << std::endl;
             break;
         case 5:
-            int x;
             std::cin >> x;
             std::cout << data[x] << std::endl;
             break;
